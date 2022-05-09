@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 
 @Preview
 @Composable
-fun PermissionDeniedScreen() {
+fun PermissionGuide() {
     Column(
         modifier = Modifier
             .fillMaxSize()
