@@ -3,4 +3,5 @@
     <string name="add_device">Add a device</string>
     <string name="select_device">Select Device</string>
     <string name="no_devices">No devices found yet.</string>
+    <string name="unknown">Unknown</string>
 </resources>

@@ -8,28 +8,37 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Text
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 
 @SuppressLint("MissingPermission")
 @Composable
 fun DeviceScanScreen() {
     val devices = remember { mutableStateListOf<BluetoothDevice>() }
 
-    LazyColumn {
-        items(devices) { device ->
-            // TODO Implement the layout of the device display.
-            Text(if (device.name != null) device.name else device.address)
-        }
+    Column {
+        LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+        DeviceList(devices)
     }
 
     DeviceReceiver(
         onFound = { device ->
-            if (device != null && !devices.contains(device)) {
-                devices.add(device)
+            if (device != null) {
+                if (!devices.contains(device)) {
+                    devices.add(device)
+                } else {
+                    val position = devices.indexOf(device)
+                    devices.removeAt(position)
+                    devices.add(position, device)
+                }
             }
         }
     )

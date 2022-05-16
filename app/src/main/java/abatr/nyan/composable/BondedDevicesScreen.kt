@@ -1,6 +1,5 @@
 package abatr.nyan.composable
 
-import abatr.nyan.R
 import android.Manifest
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
@@ -9,13 +8,9 @@ import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.res.stringResource
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -27,7 +22,7 @@ enum class PermissionState {
 }
 
 @Composable
-fun BondedDevicesScreen(onAddDevice: () -> Unit) {
+fun BondedDevicesScreen() {
     val context = LocalContext.current
     val bondedDevices = remember { mutableStateListOf<BluetoothDevice>() }
     val permission = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -77,35 +72,15 @@ fun BondedDevicesScreen(onAddDevice: () -> Unit) {
         }
     }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(text = stringResource(id = R.string.app_name)) },
-                actions = {
-                    if (permissionState == PermissionState.Granted) {
-                        IconButton(onClick = {
-                            onAddDevice()
-                        }) {
-                            Icon(
-                                Icons.Filled.Add,
-                                contentDescription = stringResource(id = R.string.add_device)
-                            )
-                        }
-                    }
-                }
-            )
+    when (permissionState) {
+        PermissionState.Checking -> {
+            // NOP.
         }
-    ) {
-        when (permissionState) {
-            PermissionState.Checking -> {
-                // NOP.
-            }
-            PermissionState.Granted -> {
-                BondedDevices(bondedDevices)
-            }
-            PermissionState.Denied -> {
-                PermissionGuide()
-            }
+        PermissionState.Granted -> {
+            DeviceList(bondedDevices)
+        }
+        PermissionState.Denied -> {
+            PermissionGuide()
         }
     }
 }
