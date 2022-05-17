@@ -4,4 +4,7 @@
     <string name="select_device">Select Device</string>
     <string name="no_devices">No devices found yet.</string>
     <string name="unknown">Unknown</string>
+    <string name="prefs_is_service_enabled">IS_SERVICE_ENABLED</string>
+    <string name="how_to_stop_service">To stop the Nyan service, start the Nyan application and turn off the toggle.</string>
+    <string name="foreground_service_channel_id">NyanService</string>
 </resources>

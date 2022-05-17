@@ -27,6 +27,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             var appState by remember { mutableStateOf(AppState.MAIN) }
+            var serviceEnabled by remember { mutableStateOf(NyanService.isEnabled(this)) }
 
             NyanTheme {
                 Scaffold(
@@ -36,6 +37,18 @@ class MainActivity : ComponentActivity() {
                             actions = {
                                 when (appState) {
                                     AppState.MAIN -> {
+                                        // FIXME These composables should be separated.
+                                        Switch(
+                                            checked = serviceEnabled,
+                                            onCheckedChange = { checked ->
+                                                NyanService.setEnabled(this@MainActivity, checked)
+                                                serviceEnabled = checked
+                                                if (serviceEnabled) {
+                                                    NyanService.startNyanService(this@MainActivity)
+                                                } else {
+                                                    NyanService.stopNyanService(this@MainActivity)
+                                                }
+                                            })
                                         IconButton(onClick = {
                                             // TODO I want to add some kind of cool screen transition effect.
                                             appState = AppState.DEVICE_SCAN
@@ -45,6 +58,9 @@ class MainActivity : ComponentActivity() {
                                                 contentDescription = stringResource(id = R.string.add_device)
                                             )
                                         }
+                                    }
+                                    else -> {
+                                        // Nothing to display at this time.
                                     }
                                 }
                             }
