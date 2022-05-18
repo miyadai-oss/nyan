@@ -1,10 +1,10 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Nyan</string>
     <string name="add_device">Add a device</string>
-    <string name="select_device">Select Device</string>
-    <string name="no_devices">No devices found yet.</string>
     <string name="unknown">Unknown</string>
     <string name="prefs_is_service_enabled">IS_SERVICE_ENABLED</string>
     <string name="how_to_stop_service">To stop the Nyan service, start the Nyan application and turn off the toggle.</string>
     <string name="foreground_service_channel_id">NyanService</string>
+    <string name="rfomm_service_name">Nyan Service</string>
+    <string name="rfcomm_service_uuid" tools:ignore="TypographyDashes">685384bc-1666-400d-8872-4ffb0b63c456</string>
 </resources>

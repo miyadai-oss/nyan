@@ -1,5 +1,6 @@
 package abatr.nyan.composable
 
+import abatr.nyan.R
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -10,18 +11,16 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
+import java.util.*
 
 @SuppressLint("MissingPermission")
 @Composable
 fun DeviceScanScreen() {
+    val context = LocalContext.current
     val devices = remember { mutableStateListOf<BluetoothDevice>() }
 
     Column {
@@ -33,7 +32,11 @@ fun DeviceScanScreen() {
         onFound = { device ->
             if (device != null) {
                 if (!devices.contains(device)) {
-                    devices.add(device)
+                    for (uuid in device.uuids) {
+                        if (uuid.uuid.equals(UUID.fromString(context.getString(R.string.rfcomm_service_uuid)))) {
+                            devices.add(device)
+                        }
+                    }
                 } else {
                     val position = devices.indexOf(device)
                     devices.removeAt(position)

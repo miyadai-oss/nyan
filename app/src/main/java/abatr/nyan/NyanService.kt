@@ -11,9 +11,18 @@ import androidx.core.app.NotificationCompat
 import androidx.preference.PreferenceManager
 
 class NyanService : Service() {
+    private lateinit var rfcommServer: RfcommServer
+
     override fun onBind(p0: Intent?): IBinder? {
         // We do not expect to use binders at this time.
         return null
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+
+        rfcommServer = RfcommServer(this)
+        rfcommServer.start()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -40,6 +49,12 @@ class NyanService : Service() {
         }
 
         return START_STICKY
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        rfcommServer.stop()
     }
 
     companion object {

@@ -1,10 +1,9 @@
 package abatr.nyan.composable
 
 import abatr.nyan.R
-import android.Manifest
+import abatr.nyan.util.PermissionUtil
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
-import android.content.pm.PackageManager
-import android.os.Build
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat
 
 @Composable
 fun DeviceList(devices: MutableList<BluetoothDevice>) {
@@ -33,14 +31,8 @@ fun DeviceList(devices: MutableList<BluetoothDevice>) {
                 Column(
                     modifier = Modifier.padding(8.dp)
                 ) {
-                    // I'd like to refactor it a bit better.
-                    if ((Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && ActivityCompat.checkSelfPermission(
-                            LocalContext.current,
-                            Manifest.permission.BLUETOOTH_CONNECT
-                        ) == PackageManager.PERMISSION_GRANTED) || (Build.VERSION.SDK_INT < Build.VERSION_CODES.S && ActivityCompat.checkSelfPermission(
-                            LocalContext.current, Manifest.permission.BLUETOOTH
-                        ) == PackageManager.PERMISSION_GRANTED)
-                    ) {
+                    @SuppressLint("MissingPermission")
+                    if (PermissionUtil.isBluetoothPermitted(LocalContext.current)) {
                         Text(
                             if (device.name != null) device.name else stringResource(R.string.unknown),
                             style = MaterialTheme.typography.h6

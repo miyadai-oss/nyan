@@ -1,9 +1,10 @@
 package abatr.nyan.composable
 
+import abatr.nyan.util.PermissionUtil
 import android.Manifest
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
-import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -11,7 +12,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 
@@ -32,9 +32,11 @@ fun BondedDevicesScreen() {
     }
 
     var permissionState by remember { mutableStateOf(PermissionState.Checking) }
+
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = { isGranted ->
+            @SuppressLint("MissingPermission")
             if (isGranted) {
                 permissionState = PermissionState.Granted
                 bondedDevices.clear()
@@ -44,14 +46,12 @@ fun BondedDevicesScreen() {
             }
         }
     )
+
     val lifecycleObserver = remember {
         LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_START) {
-                if (ActivityCompat.checkSelfPermission(
-                        context,
-                        permission
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
+                @SuppressLint("MissingPermission")
+                if (PermissionUtil.isBluetoothPermitted(context)) {
                     permissionState = PermissionState.Granted
                     bondedDevices.clear()
                     bondedDevices.addAll((context.getSystemService(ComponentActivity.BLUETOOTH_SERVICE) as BluetoothManager).adapter.bondedDevices)
