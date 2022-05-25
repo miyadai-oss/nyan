@@ -1,4 +1,4 @@
-package abatr.nyan.ui.theme
+package net.fudiyama.nyan.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

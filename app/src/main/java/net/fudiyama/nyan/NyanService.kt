@@ -1,4 +1,4 @@
-package abatr.nyan
+package net.fudiyama.nyan
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

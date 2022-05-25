@@ -1,6 +1,6 @@
-package abatr.nyan.composable
+package net.fudiyama.nyan.composable
 
-import abatr.nyan.util.PermissionUtil
+import net.fudiyama.nyan.util.PermissionUtil
 import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothDevice

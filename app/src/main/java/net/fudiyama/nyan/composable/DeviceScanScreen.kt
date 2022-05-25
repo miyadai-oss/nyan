@@ -1,6 +1,5 @@
-package abatr.nyan.composable
+package net.fudiyama.nyan.composable
 
-import abatr.nyan.R
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -15,6 +14,7 @@ import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import net.fudiyama.nyan.R
 import java.util.*
 
 @SuppressLint("MissingPermission")

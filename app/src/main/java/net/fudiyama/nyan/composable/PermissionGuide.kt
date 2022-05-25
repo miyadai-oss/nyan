@@ -1,4 +1,4 @@
-package abatr.nyan.composable
+package net.fudiyama.nyan.composable
 
 import android.content.Intent
 import android.net.Uri

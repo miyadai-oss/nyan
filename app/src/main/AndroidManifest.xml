@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="abatr.nyan">
+    package="net.fudiyama.nyan">
 
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nyan">
         <activity
-            android:name=".MainActivity"
+            android:name="net.fudiyama.nyan.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,14 +26,14 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name=".BootReceiver"
+            android:name="net.fudiyama.nyan.BootReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
         <service
-            android:name=".NyanService"
+            android:name="net.fudiyama.nyan.NyanService"
             android:exported="false" />
     </application>
 

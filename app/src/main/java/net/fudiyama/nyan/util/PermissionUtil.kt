@@ -1,4 +1,4 @@
-package abatr.nyan.util
+package net.fudiyama.nyan.util
 
 import android.Manifest
 import android.content.Context

@@ -1,8 +1,8 @@
-package abatr.nyan
+package net.fudiyama.nyan
 
-import abatr.nyan.composable.BondedDevicesScreen
-import abatr.nyan.composable.DeviceScanScreen
-import abatr.nyan.ui.theme.NyanTheme
+import net.fudiyama.nyan.composable.BondedDevicesScreen
+import net.fudiyama.nyan.composable.DeviceScanScreen
+import net.fudiyama.nyan.ui.theme.NyanTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler

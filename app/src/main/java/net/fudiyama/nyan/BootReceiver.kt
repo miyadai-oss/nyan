@@ -1,4 +1,4 @@
-package abatr.nyan
+package net.fudiyama.nyan
 
 import android.content.BroadcastReceiver
 import android.content.Context
