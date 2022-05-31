@@ -32,9 +32,11 @@ fun DeviceScanScreen() {
         onFound = { device ->
             if (device != null) {
                 if (!devices.contains(device)) {
-                    for (uuid in device.uuids) {
-                        if (uuid.uuid.equals(UUID.fromString(context.getString(R.string.rfcomm_service_uuid)))) {
-                            devices.add(device)
+                    if (device.uuids != null) {
+                        for (uuid in device.uuids) {
+                            if (uuid.uuid.equals(UUID.fromString(context.getString(R.string.rfcomm_service_uuid)))) {
+                                devices.add(device)
+                            }
                         }
                     }
                 } else {

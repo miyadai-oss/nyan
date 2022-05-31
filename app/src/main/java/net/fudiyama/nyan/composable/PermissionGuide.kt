@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import net.fudiyama.nyan.R
 
 @Preview
 @Composable
@@ -40,7 +41,7 @@ fun PermissionGuide() {
                 val intent = Intent()
                 intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                intent.data = Uri.parse("package:abatr.nyan")
+                intent.data = Uri.parse(context.getString(R.string.package_uri))
                 context.startActivity(intent)
             }
         ) {

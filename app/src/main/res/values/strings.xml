@@ -7,4 +7,5 @@
     <string name="foreground_service_channel_id">NyanService</string>
     <string name="rfomm_service_name">Nyan Service</string>
     <string name="rfcomm_service_uuid" tools:ignore="TypographyDashes">685384bc-1666-400d-8872-4ffb0b63c456</string>
+    <string name="package_uri">package:net.fudiyama.nyan</string>
 </resources>
